@@ -1,13 +1,8 @@
 import { NextPage } from 'next'
 import Image from 'next/image'
-
-import { Creepster } from "next/font/google";
 import ButtonGreen from '@/Components/buttons/ButtonGreen';
+import { creepster } from '@/fonts/Creepescer';
 
-const creepster = Creepster({
-  weight: '400',
-  subsets: ['latin'],
-});
 
 const Page: NextPage = () => {
   return <div className=" w-full h-screen  flex items-center flex-col gap-8" >
@@ -23,10 +18,11 @@ const Page: NextPage = () => {
                width={400}
                height={20}
         />
-        <div className={`${creepster.className} flex gap-8 `} >  
-           <ButtonGreen text='Personajes' path='/characters'/>
-           <ButtonGreen text='Temporadas' path='/seasons'/>
-           <ButtonGreen text='Capitulos' path='/chapter'/>
+        <div className={`${creepster.className} flex gap-4 md:gap-8 `} >  
+           <ButtonGreen text='Characters' path='/characters'/>
+           <ButtonGreen text='Episodes' path='/episodes'/>
+           <ButtonGreen text='Locations' path='/locations'/>
+          
         </div>
       
   </div>

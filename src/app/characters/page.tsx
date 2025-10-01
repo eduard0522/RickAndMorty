@@ -2,49 +2,46 @@
 
 import Card from "@/Components/characters/card/Card";
 import { useEffect, useState } from "react";
-import { Creepster } from "next/font/google";
+import ButtonGreen from "@/Components/buttons/ButtonGreen";
+import TitlePage from "@/Components/titles/TitlePage";
+import { Character } from "@/Interfaces/Character";
+import { creepster } from "@/fonts/Creepescer";
 
-const creepster = Creepster({
-  weight: '400',
-  subsets: ['latin'],
-});
-
-
-interface Character {
-  id: number;
-  name: string;
-  status: string;
-  species: string;
-  image: string;
-  origin: { name: string };
-}
 
 export default function Home() {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page , setPage] = useState(1);
+  const [pages , setPages] = useState(0);
 
   useEffect(() => {
-    fetch("https://rickandmortyapi.com/api/character")
+    fetch(`https://rickandmortyapi.com/api/character?page=${page}`)
       .then((res) => res.json())
       .then((data) => {
         setCharacters(data.results);
+        setPages(data.info.pages)
         setLoading(false);
       });
-  }, []);
+  }, [page]);
 
-  if (loading) return <p className="text-center mt-20">Cargando personajes...</p>;
-
+    if (loading) return <p className="text-center mt-20">Cargando personajes...</p>;
+    
   return (
     <div className="min-h-screen text-white flex flex-col items-center ">
-      <h1   className= { `${creepster.className}  [text-shadow:0_0_8px_#4dd613,0_0_12px_#7eec10] text-[#02B5CA] transition text-6xl py-4 text-stroke-200`}
-          >
-        Personajes
-      </h1>
+    <TitlePage title="Characters" />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-8 w-full max-w-7xl mt-4 pb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-8 w-full max-w-7xl mt-4 ">
         {characters.map((char) => (
             <Card key={char.id}  char={char}/>
         ))}
+      </div>
+
+      <div className={`${creepster.className} flex items-center gap-4 mt-8 pb-8 `}>
+      <ButtonGreen  text="Anterior" path='' action={ () =>  setPage((p) => Math.max(1, p + 1))} />
+        <span className="font-sans">
+          Página {page} de {pages}
+        </span>
+        <ButtonGreen  text="Siguiente" path='' action={ () =>  setPage((p) => Math.min(pages, p + 1))} />
       </div>
     </div>
   );

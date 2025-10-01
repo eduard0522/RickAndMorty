@@ -13,10 +13,7 @@ interface Props { text: string , path : string}
 const LisItem: NextPage<Props> = ({ text , path}) => {
   return  <li>
               <Link
-                className= { `${creepster.className}  [text-shadow:0_0_8px_#1ea951,0_0_12px_#13a749] text-[#1ca0dd] transition text-lg hover:text-green-700 dark:text-green-400 dark:hover:text-green-700`}
-                 style={{
-                  WebkitTextStroke: "1px #39f021", // borde negro
-                }}
+                className= { `${creepster.className}  [text-shadow:0_0_8px_#199948,0_0_12px_#168a41] text-[#1b97d1] transition text-lg hover:text-green-700 dark:text-green-400 dark:hover:text-green-700 text-stroke`}
                 href={path}
               >
                 {text}

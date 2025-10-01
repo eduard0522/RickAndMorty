@@ -1,20 +1,8 @@
 import { NextPage } from 'next'
 import Image from 'next/image';
-import { Creepster } from "next/font/google";
-
-const creepster = Creepster({
-  weight: '400',
-  subsets: ['latin'],
-});
-
-interface Character {
-  id: number;
-  name: string;
-  status: string;
-  species: string;
-  image: string;
-  origin: { name: string };
-}
+import Link from 'next/link';
+import { Character } from '@/Interfaces/Character';
+import { creepster } from '@/fonts/Creepescer';
 
 interface Props {char : Character}
 
@@ -36,9 +24,9 @@ const Card: NextPage<Props> = ({ char }) => {
       break
   }
 
-
-  return  <div
-            className="bg-gradient-to-br from-[#012a18] to-[#01393a] rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300v cursor-pointer"
+  return  <Link href={`/characters/${char.id}`}>
+       <div
+            className="w-4/5 xl:h-96 md:w-full mx-auto bg-gradient-to-br from-[#012a18] to-[#01393a] rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition-transform duration-300 cursor-pointer"
           >
             <Image 
               src={char.image} 
@@ -57,13 +45,14 @@ const Card: NextPage<Props> = ({ char }) => {
                 <span className="font-semibold" > Status: </span> {char.status} <div className={`${colorStatus}  w-2 h-2 rounded-full`}> </div>
               </p>
               <p className="text-sm">
-                <span className="font-semibold">Species:</span> {char.species}
+                <span className="font-semibold">Specie:</span> {char.species}
               </p>
               <p className="text-sm">
                 <span className="font-semibold">Origin:</span> {char.origin.name}
               </p>
             </div>
           </div>
+  </Link>
 }
 
 export default Card
