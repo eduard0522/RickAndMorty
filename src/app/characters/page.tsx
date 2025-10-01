@@ -37,7 +37,7 @@ export default function Home() {
       </div>
 
       <div className={`${creepster.className} flex items-center gap-4 mt-8 pb-8 `}>
-      <ButtonGreen  text="Anterior" path='' action={ () =>  setPage((p) => Math.max(1, p + 1))} />
+      <ButtonGreen  text="Anterior" path='' action={ () =>  setPage((p) => Math.max(1, p - 1))}  />
         <span className="font-sans">
           Página {page} de {pages}
         </span>

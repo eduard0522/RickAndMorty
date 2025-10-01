@@ -8,10 +8,12 @@ import { Episode } from '@/Interfaces/Episode'
 export default async function EpisodePage({
   params,
 }: {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }) {
+
+  const { id } = await params;
   const res = await fetch(
-    `https://rickandmortyapi.com/api/episode/${params.id}`
+    `https://rickandmortyapi.com/api/episode/${id}`
   )
 
   if (!res.ok) {

@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressContentEditableWarning={true}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased  bg-gradient-to-br from-[#00160d] to-slate-950 relative`}
       >

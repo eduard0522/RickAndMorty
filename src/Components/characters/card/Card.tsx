@@ -34,7 +34,6 @@ const Card: NextPage<Props> = ({ char }) => {
               width={56}
               height={56}
               className="w-full h-56 object-cover" 
-              unoptimized
             />
             <div className="p-4">
 

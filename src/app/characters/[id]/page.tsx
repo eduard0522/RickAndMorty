@@ -5,9 +5,11 @@ import TitlePage from "@/Components/titles/TitlePage";
 import Image from "next/image";
 import { Character} from "@/Interfaces/Character";
 
-export default async function CharacterPage({ params }: { params: { id: string } }) {
+export default async function CharacterPage({ params }: { params:Promise <{ id: string }> }) {
 
-  const res = await fetch(`https://rickandmortyapi.com/api/character/${params.id}`);
+  const { id } = await params
+
+  const res = await fetch(`https://rickandmortyapi.com/api/character/${id}`);
   const character: Character = await res.json();
 
   return (
@@ -16,7 +18,7 @@ export default async function CharacterPage({ params }: { params: { id: string }
 
       <section className="flex flex-col  md:flex-row gap-8">
          <div>
-          <Image src={character.image} alt={character.name} width={450} height={100} className="rounded-xl shadow-2xl mb-4"  unoptimized/>
+          <Image src={character.image} alt={character.name} width={450} height={100} className="rounded-xl shadow-2xl mb-4" />
       </div>
       <div className="flex flex-col gap-8 text-xl items-center md:items-start">
         <Feature  subtitle="Status" content={character.status}/>
