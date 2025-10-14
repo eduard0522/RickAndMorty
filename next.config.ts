@@ -9,4 +9,9 @@ const nextConfig: NextConfig = {
  
 };
 
+export const config = {
+  matcher: ["/","/characters/:path*", "/episodes/:path*", "/locations/:path*"],
+};
+
+
 export default nextConfig;

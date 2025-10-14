@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #ffffff;
@@ -12,14 +12,45 @@
   --font-mono: var(--font-geist-mono);
 }
 
-
 body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
- .text-stroke-200{
- -webkit-text-stroke: 2px #9CDE1E; 
- }
- .text-stroke{
-   -webkit-text-stroke:1px #21f05c;
- }
+.text-stroke-200 {
+  -webkit-text-stroke: 2px #9cde1e;
+}
+.text-stroke {
+  -webkit-text-stroke: 1px #21f05c;
+}
+
+.animate-spin-slow {
+  animation: spin 20s linear infinite;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-pulse-slow {
+  animation: pulse 2.6s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 0.7;
+  }
+}
+
+.portal {
+  background: radial-gradient(circle at 30% 30%, #63f7b1 0%, rgba(99, 247, 177, 0.25) 7%, rgba(25, 201, 125, 0.12) 15%, transparent 20%),
+              radial-gradient(circle at 70% 70%, #5ad1ff 0%, rgba(90, 209, 255, 0.18) 6%, rgba(27, 151, 209, 0.06) 14%, transparent 20%);
+  filter: blur(64px);
+}

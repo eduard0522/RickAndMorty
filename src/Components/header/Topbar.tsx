@@ -6,9 +6,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react"; 
+import { useAuthStore } from '@/stores/auth/useAuthStore'
 
 const Topbar: NextPage = () => {
   const [open, setOpen] = useState(false);
+  const logged = useAuthStore( state => state.logged)
+
+  if(!logged) return null
 
   return (
     <header className="text-white">
@@ -47,13 +51,13 @@ const Topbar: NextPage = () => {
 
   
     <div
-        className={`md:hidden px-4 py-6 transform transition-all duration-400 ease-in-out ${
+        className={`md:hidden mx-auto px-4 py-6 transform transition-all duration-400 ease-in-out ${
           open
-            ? "opacity-100 translate-y-0 max-h-96"
-            : "opacity-0 -translate-y-5 max-h-0 overflow-hidden"
+            ? "opacity-100 translate-y-0 max-h-96 scale-100"
+            : "opacity-0 scale-0-translate-y-5 max-h-0 overflow-hidden"
         }`}
       >
-        <nav aria-label="Mobile Global">
+        <nav aria-label="Mobile Global " >
           <List />
         </nav>
       </div>
