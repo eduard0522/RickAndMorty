@@ -14,7 +14,7 @@ import { usePopUpStore } from '@/stores/popUp/usePopUpStore'
 const LoginForm = ({}) => {
 
   const user = useAuthStore( state => state.user)
-  const login = useAuthStore( state => state.login)
+  const { login, logout} = useAuthStore()
 
   const [data, setData] = useState<UserLogin>({ username: '', password: '' })
    const setOpen = usePopUpStore(state => state.setOpen )
@@ -29,15 +29,12 @@ const LoginForm = ({}) => {
   const handleSubmmit = (e: React.FormEvent) => {
     e.preventDefault();
     if(data.username === user?.email && data.password === user.password ){
-        login()
-        document.cookie = `auth=true; path=/; max-age=${60 * 60};`;
         setOpen()
-        setDataPopUp("Bienvenido al Portal" , "/")
+        setDataPopUp("Bienvenido al Portal" , "/" , login)
         setData({ password : "" , username : ""})
-       
     }else{
         setOpen()
-        setDataPopUp("Credenciales Invalidas" , "/login")
+        setDataPopUp("Credenciales Invalidas" , "/login", logout)
         setData({ password : "" , username : ""})
     }
   }

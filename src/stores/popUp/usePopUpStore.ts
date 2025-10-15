@@ -1,26 +1,31 @@
-import {create} from 'zustand'
+import { create } from 'zustand'
 
 interface ModalStore {
-  isOpen : boolean
-  setOpen : () => void;
-  text  : string,
-  path : string,
-  setDataPopUp : (text : string , path : string) => void;
+  isOpen: boolean
+  text: string
+  path: string
+  action: () => void
+
+  setOpen: () => void
+  setDataPopUp: (text: string, path: string, action: () => void) => void
 }
 
-export const usePopUpStore = create<ModalStore>((set) => ({ 
-  isOpen : false , 
-  text : '',
-  path : '',
-  setOpen : () => {
-    set((state) => ({
-      isOpen: !state.isOpen
+export const usePopUpStore = create<ModalStore>((set) => ({
+  isOpen: false,
+  text: '',
+  path: '',
+  action: () => {},
+
+  setOpen: () => {
+    set((state) => ({ isOpen: !state.isOpen }))
+  },
+
+
+  setDataPopUp: (text, path, action) => {
+    set(() => ({
+      text,
+      path,
+      action,
     }))
   },
-  setDataPopUp : (text , path  ) => {
-    set(() => ({
-      text : text,
-      path : path
-    }))
-  }
-}));
+}))

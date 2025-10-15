@@ -33,9 +33,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gradient-to-br from-[#00160d] to-slate-950 relative`}
       >
-         <div className="absolute inset-0 flex items-center justify-center">
-            <div className="portal animate-spin-slow w-[700px] h-[400px] rounded-full opacity-70 blur-2xl"></div>
-          </div>
         <div className='z-10 relative'>
           
           <Topbar />

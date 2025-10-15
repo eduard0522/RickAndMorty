@@ -6,14 +6,12 @@ import { IoCloseCircleOutline } from "react-icons/io5"
 import { creepster } from "@/fonts/Creepescer"
 
 
-const PopUp = ({ }) => {
+const PopUp = ({  }) => {
 
-  const isModalOpen = usePopUpStore(state => state.isOpen) 
-  const setOpen = usePopUpStore(state => state.setOpen )
-  const text = usePopUpStore(state => state.text )
-  const path = usePopUpStore(state => state.path )
+  const {isOpen , text , path , action , setOpen} = usePopUpStore() 
+  
 
-  if( !isModalOpen ) return null
+  if( !isOpen ) return null
   return <div  className="fixed inset-0  bg-black/70  z-20 flex justify-center items-center flex-col">
     
     <div className="relative w-72 z-30 h-56 bg-slate-950 shadow-emerald-400 shadow-2xl rounded-xl  flex flex-col justify-center items-center gap-12">
@@ -21,7 +19,7 @@ const PopUp = ({ }) => {
        <IoCloseCircleOutline  />
      </div>
       <h2 className={`${creepster.className} text-green-500`}>{text}</h2>
-      <ButtonGreen text="Continuar" action={setOpen} path={path} />
+      <ButtonGreen text="Continuar" action={action}  path={path}  close/>
     </div>
   </div>
 }

@@ -7,20 +7,29 @@ export const useAuthStore = create(
     (set) => ({
       logged: false,
       user: {
-        username: 'Eduard Villamil',
-        password: '12345678',
-        role: 'admin',
-        email: 'eduard@gmail.com',
+        username: "Eduard Villamil",
+        password: "12345678",
+        role: "admin",
+        email: "eduard@gmail.com",
       },
 
-      login: () => set(() => ({ logged: true })),
+      login: () => {
+        document.cookie = `auth=true; path=/; max-age=${60 * 60};`;
+        set({ logged: true });
 
-      logout: () => set(() => ({ logged: false })),
+      },
 
-      setUser: (newUser: User) => set(() => ({ user: newUser })),
+      logout: () => {
+        document.cookie = "auth=; path=/; max-age=0;";
+        localStorage.clear()
+        set({ logged: false });
+        
+      },
+
+      setUser: (newUser: User) => set({ user: newUser }),
     }),
     {
-      name: 'auth-storage', 
+      name: "auth-storage",
     }
   )
 );
